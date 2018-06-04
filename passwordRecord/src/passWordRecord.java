@@ -19,6 +19,7 @@ public class passWordRecord {
 
             case ("b"):
                 System.out.println("Add the password");
+                addInfo info = new addInfo("zhaonan");
                 break;
 
             case ("c"):

@@ -1,22 +1,22 @@
 import javax.json.Json;
 import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonGeneratorFactory;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.Date;
 import java.util.Scanner;
 
 public class createJsonFile {
     private Scanner scanner = new Scanner(System.in);
-    private String name, info;
+    private String name, info, inputWords;
 
+    /**
+     * This constructor is to call all the methods used to set up a file.
+     */
     public createJsonFile() {
-        System.out.println("Enter the owner of this file");
+        System.out.println("Enter the first name of this file");
         setName();
         System.out.println("Enter the Introduction of the document");
         setInfo();
-
         setFile();
     }
 
@@ -24,7 +24,15 @@ public class createJsonFile {
      * This is to set the introduction from the user.
      */
     public void setInfo() {
-        info = scanner.next();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            info = reader.readLine();
+            reader.close();
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+        //if there is nothing in the variable.
         if (info.isEmpty()) {
             info = null;
         }
@@ -35,6 +43,7 @@ public class createJsonFile {
      */
     public void setName() {
         name = scanner.next();
+        name = name.toLowerCase();
     }
 
     /**
@@ -50,7 +59,6 @@ public class createJsonFile {
             generator.write("name", name);
             generator.write("date", new Date().toString());
             generator.write("Introduction", info);
-
             //close the generator and writer.
             generator.writeEnd();
             generator.close();
