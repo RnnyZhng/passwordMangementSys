@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class passWordRecord {
@@ -11,15 +14,28 @@ public class passWordRecord {
         Scanner scanner = new Scanner(System.in);
         String selection = scanner.next();
 
+        //get the user name.
+        System.out.println("What is your first name?");
+        String userFirstName = scanner.next().toLowerCase();
+
         //process the selection.
         switch (selection.toLowerCase()) {
             case ("a"):
-                System.out.println("Search for the password is selected.");
+                System.out.println("The WEBSITE/COMPANY you want to search for password.");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                String title = "nothing";
+                try {
+                    title = reader.readLine().toLowerCase();
+                    reader.close();
+                } catch (IOException e) {
+                    e.getStackTrace();
+                }
+
+                searchPassword searcher = new searchPassword(userFirstName, title);
                 break;
 
             case ("b"):
-                System.out.println("Add the password");
-                addInfo info = new addInfo("zhaonan");
+                addInfo info = new addInfo(userFirstName);
                 break;
 
             case ("c"):
@@ -32,11 +48,12 @@ public class passWordRecord {
 
             case ("e"):
                 createJsonFile file = new createJsonFile();
+                file.createJsonFileNormal();
                 break;
 
             default:
                 System.out.println("Invalid Selection");
         }
-
+        scanner.close();
     }
 }

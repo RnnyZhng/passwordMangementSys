@@ -7,17 +7,17 @@ import java.util.Scanner;
 
 public class createJsonFile {
     private Scanner scanner = new Scanner(System.in);
-    private String name, info, inputWords;
+    private String name, info;
 
     /**
      * This constructor is to call all the methods used to set up a file.
      */
-    public createJsonFile() {
+    public void createJsonFileNormal() {
         System.out.println("Enter the first name of this file");
         setName();
         System.out.println("Enter the Introduction of the document");
         setInfo();
-        setFile();
+        setFile(name, info);
     }
 
     /**
@@ -49,7 +49,7 @@ public class createJsonFile {
     /**
      * This is to set the Json file together with name, date and information.
      */
-    public void setFile() {
+    public void setFile(String name, String info) {
         JsonGeneratorFactory factory = Json.createGeneratorFactory(null);
         try {
             Writer writer = new FileWriter(name + "_passwordRecord" + ".json");
@@ -68,5 +68,8 @@ public class createJsonFile {
             e.getStackTrace();
         }
     }
+
+
+
 
 }
