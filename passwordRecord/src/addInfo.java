@@ -79,7 +79,7 @@ public class addInfo {
         try {
             Reader reader = new FileReader(inputFile);
             JsonParser parser = factory.createParser(reader);
-
+            //create a writer for the json
             JsonGeneratorFactory factory2 = Json.createGeneratorFactory(null);
             Writer writer = new FileWriter(outputFile);
             JsonGenerator generator = factory2.createGenerator(writer);
